@@ -4,13 +4,12 @@ import java.util.ArrayList;
 public class Principal {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		
 		BDSimulado bds = new BDSimulado();
 
-		ArrayList<Passageiro> passageiros = bds.getPassageiros();
-		ArrayList<Viagem> viagens = bds.getViagens();
+//		ArrayList<Passageiro> passageiros = bds.getPassageiros();
+//		ArrayList<Viagem> viagens = bds.getViagens();
 		
 		String getInfoPassageiro = bds.getInfoPassageiro("Maria da Silva");
 		System.out.println(getInfoPassageiro + "\n");
