@@ -67,20 +67,25 @@ public class BDSimulado {
         return viagens;
     }
     
-	public ArrayList<Passageiro> getInfoPassageiro(String nome){
-		
-		ArrayList<Passageiro> resultado = new ArrayList<Passageiro>();
-		
-		
-		for (int i = 0; i < this.passageiros.size(); i++) {
-			
-			if (this.passageiros.get(i).getNome().equals(nome)) {
-				resultado.add(this.passageiros.get(i));
+    public String getInfoPassageiro(String nome){
+    	String  resultado = " ";
+    	
+    	
+    	for (int i = 0; i < this.passageiros.size(); i++) {
+    		if (this.passageiros.get(i).getNome().equals(nome)) {
+    			resultado = "Nome: " + this.passageiros.get(i).getNome() 
+    					+ "\n" +
+    					"Cidade: " +this.passageiros.get(i).getCidade()
+    					+ "\n" +
+    					"UF: " + this.passageiros.get(i).getUf()
+    					+ "\n" +
+    					"Idade: " + this.passageiros.get(i).getIdade();
+				
 			}
+			
 		}
-
-		return resultado;
-	}
+    	return resultado;
+    }
     
 	public int getQtdeViagens(String passageiro){
 		int resultado = 0;
@@ -98,19 +103,89 @@ public class BDSimulado {
 		
 	}
 	
-	public int getMaiorViagem(){
-		int resultado = 0;
+    public int getMaiorViagem(){
+    	int resultado = 0;
+    	double  maior = 0;
+    	
+    	for (int i = 0; i < this.viagens.size(); i++) {		
+			
+    		if (this.viagens.get(i).getDistancia()  > maior) {
+    			maior = this.viagens.get(i).getDistancia();
+    			resultado = this.viagens.get(i).getCodigo();
+    		
+				
+			}
+    		}
 		
-		for (int i = 0; i < viagens.size(); i++) {
-			if (this.viagens.get(i).getDistancia() > (i)) {
+    	return resultado;
+    }
+	
+    public ArrayList<String> listaUFsViagem(String passageiro){
+    	ArrayList<String> resultado = new ArrayList<String>();
+    	
+    	for (int i = 0; i < this.viagens.size(); i++) {
+    		if (this.viagens.get(i).getPassageiro().getNome().equals(passageiro)) {
+    			resultado.add(this.viagens.get(i).getUf());
 				
 			}
 			
 		}
+    	return resultado;
+    }
+    
+    public double getCustoPorKm(String nomePas){
+    	double resultado = 0;
+    	
+    	for (int i = 0; i < this.viagens.size(); i++) {
+    		if (this.viagens.get(i).getPassageiro().getNome().equals(nomePas)) {
+    			resultado = this.viagens.get(i).getValor() / this.viagens.get(i).getDistancia();
 				
-		return resultado;		
-	}
-	
-	
+			}
+			
+		}
+    	return resultado;
+    }
+    
+    public ArrayList<String> getListaMotoqueiros(int mes, int ano){
+    	ArrayList<String> resultado = new ArrayList<String>();
+    	
+    	for (int i = 0; i < this.viagens.size(); i++) {
+    		if (this.viagens.get(i).getMes() == mes && this.viagens.get(i).getAno() == ano) {
+    			resultado.add(this.viagens.get(i).getMotoqueiro());
+				
+			}
+			
+		}
+    	return resultado;
+    }
+    
+    public int getViagensForaDaUF(String passageiro, String UF){
+    	int resultado = 0;
+    	
+    	
+    	for (int i = 0; i < this.viagens.size(); i++) {
+    		if (this.viagens.get(i).getPassageiro().getNome().equals(passageiro) && this.viagens.get(i).getUf() != UF ) {
+    			resultado ++;
+				
+			}
+			
+		}
+    	return resultado;
+    }
+    
+    public double getKmPosPasMot(String passageiro, String motoqueiro){
+    	double resultado = 0;
+    	
+    	for (int i = 0; i < this.viagens.size(); i++) {
+    		if (this.viagens.get(i).getPassageiro().getNome().equals(passageiro) && this.viagens.get(i).getMotoqueiro().equals(motoqueiro)) {
+    			resultado = this.viagens.get(i).getDistancia();
+				
+			}
+			
+		}
+    	return resultado;
+    }
+    
+   
 	
 }
